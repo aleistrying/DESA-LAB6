@@ -39,12 +39,15 @@
                     onFormSubmit: (e) => {
                         e.preventDefault();
                         try {
+
                             const N = parseInt(App.htmlElements.N.value);
+
+                            if (typeof (N) !== "number" || N % 1 !== 0) throw new Error("El valor no es un Entero. Ingrese un entero.");
+
                             let M = 10;
                             try {
                                 //nada mas N necesita validacion, ya que el random automaticamente selecciona un valor HASTA el valor M. pero no hay input para que el usuario ingrese el dato.
                                 if (N < 1 || N > 10) throw new Error("Valor fuera de rango. Rango: 1 - 10");
-                                if (typeof (N) !== "number" && N % 1 !== 0) throw new Error("El valor no es un Entero. Ingrese un entero.");
                                 let matriz = [];
                                 let tabla = "";
                                 let sumDiaPrinc = 0;
@@ -65,14 +68,16 @@
                                 App.htmlElements.diagonal.innerHTML = `Suma de la Diagonal Principal: ${sumDiaPrinc}`;
                             }
                             catch (err) {
-                                console.log(err);
+                                console.log("interno: " + err);
                                 App.htmlElements.matriz.innerHTML = "";
                                 App.htmlElements.diagonal.innerHTML = "";
 
                             }
                         }
                         catch (err) {
-                            console.log(err);
+                            console.log("interno: " + err);
+                            App.htmlElements.matriz.innerHTML = "";
+                            App.htmlElements.diagonal.innerHTML = "";
                         }
                     }
                 },
