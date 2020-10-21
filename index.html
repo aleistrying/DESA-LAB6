@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laboratorio #6 - Matriz aleatoria</title>
+</head>
+
+<body>
+
+    <h1>Laboratorio #6 - Matriz aleatoria</h1>
+    <form id="form1">
+        <label for="N">Ingrese el valor N</label>
+        <input id="N" type="number">
+        <button type="submit" value="submit">Submit</button>
+    </form>
+    <table id="table1">
+        <thead>
+
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+    <span id="span1"></span>
+    <script>
+        (() => {
+            const App = {
+                htmlElements: {
+                    form1: document.getElementById("form1"),
+                    table1: document.getElementById("table1"),
+                    span1: document.getElementById("span1"),
+                    N: document.getElementById("N")
+                },
+                init: () => {
+                    App.bindEvents();
+                },
+                bindEvents: () => { App.htmlElements.form1.addEventListener("onclick", App.Methods.onFormSubmit) },
+                Methods: {
+                    onFormSubmit: (e) => {
+                        e.preventDefaults();
+                        try {
+                            const N = parseInt(App.htmlElements.N.value);
+                            try {
+                                if (N < 1 || N > 10) throw new Error("Valor fuera de rango. Rango: 1 - 10");
+                                
+                            }
+                            catch (err) {
+                                console.log(err);
+                            }
+                        }
+                        catch (err) {
+                            console.log(err);
+                        }
+                    }
+                },
+            };
+            App.init();
+        })
+    </script>
+</body>
+
+</html>
