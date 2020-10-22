@@ -52,17 +52,34 @@
                                 let tabla = "";
                                 let sumDiaPrinc = 0;
 
-                                for (let j = 0; j < N; j++) {
-                                    matriz.push([]);
-                                    tabla = "<tr>" + tabla;
-                                    for (let k = 0; k < N; k++) {
-                                        matriz[j].push(Math.floor(Math.random() * M) + 1);
-                                        tabla += `<td style='width:25px;height:25px;text-align:center'>${matriz[j][k]}</td>`;
+                                // Version 1 - Speed
+                                for (let i = 0; i < N * N; i++) {
+                                    let y = Math.floor(i / N),
+                                        x = i % N;
 
-                                        if (j == k) sumDiaPrinc += matriz[j][k];
+                                    if (x == 0) {
+                                        matriz.push([]);
+                                        tabla = "<tr>" + tabla;
                                     }
-                                    tabla += "</tr>";
+                                    matriz[y].push(Math.floor(Math.random() * M) + 1);
+                                    tabla += `<td style='width:25px;height:25px;text-align:center'>${matriz[y][x]}</td > `;
+
+                                    if (x == y) sumDiaPrinc += matriz[y][x];
+                                    if (x + 1 == N) tabla += "</tr>";
                                 }
+
+                                // version 2
+                                // for (let j = 0; j < N; j++) {
+                                //     matriz.push([]);
+                                //     tabla = "<tr>" + tabla;
+                                //     for (let k = 0; k < N; k++) {
+                                //         matriz[j].push(Math.floor(Math.random() * M) + 1);
+                                //         tabla += `< td style = 'width:25px;height:25px;text-align:center' > ${ matriz[j][k] }</td > `;
+
+                                //         if (j == k) sumDiaPrinc += matriz[j][k];
+                                //     }
+                                //     tabla += "</tr>";
+                                // }
 
                                 App.htmlElements.matriz.innerHTML = tabla;
                                 App.htmlElements.diagonal.innerHTML = `Suma de la Diagonal Principal: ${sumDiaPrinc}`;
